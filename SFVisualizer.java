@@ -5,6 +5,32 @@ import java.awt.Color;
 
 public class SFVisualizer
 {
+    SFDataPt[] dSet;
+    String origDSetName;
+    
+    public SFVisualizer()throws IOException{
+	dSet = SFFileParser.parseFile("2013_cleaned.csv");
+	origDSetName = "2013_cleaned.csv";
+	int minX = this.getMinXCoord();
+        int maxX = this.getMaxXCoord();
+        int minY = this.getMinYCoord();
+        int maxY = this.getMaxYCoord();
+        StdDraw.setXscale(minX, maxX);
+        StdDraw.setYscale(minY, maxY);
+    }
+
+    public SFVisualizer(String fileName)throws IOException{
+	dSet = SFFileParser.parseFile(fileName);
+	origDSetName = fileName;
+	int minX = this.getMinXCoord();
+        int maxX = this.getMaxXCoord();
+        int minY = this.getMinYCoord();
+        int maxY = this.getMaxYCoord();
+
+        StdDraw.setXscale(minX, maxX);
+        StdDraw.setYscale(minY, maxY);
+    }
+    
     /**
      * Reads in a Stop and Frisk data set from a file and visualizes
      * the data set.
@@ -61,6 +87,22 @@ public class SFVisualizer
         }
         StdDraw.show(timeMil);
     }
+
+    public void drawData(Color c, int timeMil)
+    {
+        StdDraw.show(0);
+        StdDraw.clear();
+        StdDraw.setPenColor(c);
+        for(int i = 0; i < this.dSet.length; i++)
+        {
+            StdDraw.point(this.dSet[i].getX(), this.dSet[i].getY());
+        }
+        StdDraw.show(timeMil);
+    }
+
+    public void rollBack()throws IOException{
+	this.dSet = SFFileParser.parseFile(this.origDSetName);
+    }
     
     /**
      * Given an array of SFDataPts and a borough, returns an array of only the
@@ -73,13 +115,20 @@ public class SFVisualizer
      */
     public static SFDataPt[] filterByBorough(SFDataPt[] dataSet, String borough)
     {
-        // Replace this code
-        //SFFactFinder test = new SFFactFinder();
         return SFFactFinder.filterByBorough(dataSet, borough);
+    }
+
+    public SFDataPt[] filterByBorough(String borough)
+    {
+        return SFFactFinder.filterByBorough(this.dSet, borough);
     }
     
     public static SFDataPt[] filterByRace(SFDataPt[] dataSet, String race){
         return SFFactFinder.filterByBorough(dataSet, race);
+    }
+
+    public SFDataPt[] filterByRace(String race){
+        return SFFactFinder.filterByBorough(this.dSet, race);
     }
     
     /**
@@ -89,14 +138,24 @@ public class SFVisualizer
      */
     public static int getMinXCoord(SFDataPt[] dataSet)
     {
-        // Replace this code
-        int max = Integer.MIN_VALUE;
+        int min = Integer.MAX_VALUE;
         for (int i = 0; i < dataSet.length; i++){
-            if (dataSet[i].getX() > max){
-                max = dataSet[i].getX();
+            if (dataSet[i].getX() < min){
+                min = dataSet[i].getX();
             }
         }
-        return max;
+        return min;
+    }
+
+    public int getMinXCoord()
+    {
+        int min = Integer.MAX_VALUE;
+        for (int i = 0; i < this.dSet.length; i++){
+            if (this.dSet[i].getX() < min){
+                min = this.dSet[i].getX();
+            }
+        }
+        return min;
     }
     
     /**
@@ -106,14 +165,24 @@ public class SFVisualizer
      */
     public static int getMinYCoord(SFDataPt[] dataSet)
     {
-        // Replace this code
-        int max = Integer.MIN_VALUE;
+        int max = Integer.MAX_VALUE;
         for (int i = 0; i < dataSet.length; i++){
-            if (dataSet[i].getY() > max){
+            if (dataSet[i].getY() < max){
                 max = dataSet[i].getY();
             }
         }
         return max;
+    }
+
+    public int getMinYCoord()
+    {
+        int min = Integer.MAX_VALUE;
+        for (int i = 0; i < this.dSet.length; i++){
+            if (this.dSet[i].getY() < min){
+                min = this.dSet[i].getY();
+            }
+        }
+        return min;
     }
     
     /**
@@ -123,7 +192,6 @@ public class SFVisualizer
      */
     public static int getMaxXCoord(SFDataPt[] dataSet)
     {
-        // Replace this code
         int min = Integer.MAX_VALUE;
         for (int i = 0; i < dataSet.length; i++){
             if (dataSet[i].getX() < min){
@@ -131,6 +199,17 @@ public class SFVisualizer
             }
         }
         return min;
+    }
+
+    public int getMaxXCoord()
+    {
+        int max = Integer.MIN_VALUE;
+        for (int i = 0; i < this.dSet.length; i++){
+            if (this.dSet[i].getX() > max){
+                max = this.dSet[i].getX();
+            }
+        }
+        return max;
     }
     
     /**
@@ -140,8 +219,7 @@ public class SFVisualizer
      */
     public static int getMaxYCoord(SFDataPt[] dataSet)
     {
-        // Replace this code
-        int min = Integer.MAX_VALUE;
+        int min = Integer.MIN_VALUE;
         for (int i = 0; i < dataSet.length; i++){
             if (dataSet[i].getY() < min){
                 min = dataSet[i].getY();
@@ -150,7 +228,20 @@ public class SFVisualizer
         return min;
     }
 
+    public int getMaxYCoord()
+    {
+        int max = Integer.MIN_VALUE;
+        for (int i = 0; i < this.dSet.length; i++){
+            if (this.dSet[i].getY() > max){
+                max = this.dSet[i].getY();
+            }
+	}
+        return max;
+    }
+
     public static void main(String[]args) throws IOException{
- 	visualizeData();
+	SFVisualizer SFV = new SFVisualizer();
+	//SFV.filterByRace("A");
+	SFV.drawData(StdDraw.BLACK, 2000);
     }
 }
