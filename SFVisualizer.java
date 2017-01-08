@@ -118,17 +118,17 @@ public class SFVisualizer
         return SFFactFinder.filterByBorough(dataSet, borough);
     }
 
-    public SFDataPt[] filterByBorough(String borough)
+    public void filterByBorough(String borough)
     {
-        return SFFactFinder.filterByBorough(this.dSet, borough);
+        this.dSet = SFFactFinder.filterByBorough(this.dSet, borough);
     }
     
     public static SFDataPt[] filterByRace(SFDataPt[] dataSet, String race){
-        return SFFactFinder.filterByBorough(dataSet, race);
+        return SFFactFinder.filterByRaceEnc(dataSet, race);
     }
 
-    public SFDataPt[] filterByRace(String race){
-        return SFFactFinder.filterByBorough(this.dSet, race);
+    public void filterByRace(String race){
+        this.dSet = SFFactFinder.filterByRaceEnc(this.dSet, race);
     }
     
     /**
@@ -241,7 +241,7 @@ public class SFVisualizer
 
     public static void main(String[]args) throws IOException{
 	SFVisualizer SFV = new SFVisualizer();
-	//SFV.filterByRace("A");
+	SFV.filterByRace("A");
 	SFV.drawData(StdDraw.BLACK, 2000);
     }
 }
