@@ -1,0 +1,25 @@
+#BlueJ class context
+comment0.params=
+comment0.target=void\ visualizeData()
+comment0.text=\r\n\ Reads\ in\ a\ Stop\ and\ Frisk\ data\ set\ from\ a\ file\ and\ visualizes\r\n\ the\ data\ set.\r\n
+comment1.params=dataSet\ c\ timeMil
+comment1.target=void\ drawData(SFDataPt[],\ java.awt.Color,\ int)
+comment1.text=\r\n\ Given\ an\ array\ of\ SFDataPts,\ a\ color,\ and\ a\ time\ (measured\ in\r\n\ milliseconds),\ draw\ the\ points\ on\ the\ cavnas.\r\n
+comment2.params=dataSet\ borough
+comment2.target=SFDataPt[]\ filterByBorough(SFDataPt[],\ java.lang.String)
+comment2.text=\r\n\ Given\ an\ array\ of\ SFDataPts\ and\ a\ borough,\ returns\ an\ array\ of\ only\ the\r\n\ SFDataPts\ that\ occurred\ in\ that\ boroguh.\r\n\ \r\n\ @param\ dataSet\ an\ array\ of\ SFDataPts\r\n\ @param\ borough\ the\ filtering\ borough\r\n\ \ \ Precondition\:\ borough\ should\ be\ "BRONX",\ "BROOKLYN",\ "MANHATTAN",\r\n\ \ \ "QUEENS",\ or\ "STATEN\ ISLAND"\r\n
+comment3.params=dataSet\ race
+comment3.target=SFDataPt[]\ filterByRace(SFDataPt[],\ java.lang.String)
+comment4.params=dataSet
+comment4.target=int\ getMinXCoord(SFDataPt[])
+comment4.text=\r\n\ Returns\ the\ minimum\ x-coordinate\ contained\ in\ the\ dataSet.\r\n\ \r\n\ @param\ dataSet\ An\ array\ of\ SFDataPts\r\n
+comment5.params=dataSet
+comment5.target=int\ getMinYCoord(SFDataPt[])
+comment5.text=\r\n\ Returns\ the\ minimum\ y-coordinate\ contained\ in\ the\ dataSet.\r\n\ \r\n\ @param\ dataSet\ An\ array\ of\ SFDataPts\r\n
+comment6.params=dataSet
+comment6.target=int\ getMaxXCoord(SFDataPt[])
+comment6.text=\r\n\ Returns\ the\ maximum\ x-coordinate\ contained\ in\ the\ dataSet.\r\n\ \r\n\ @param\ dataSet\ An\ array\ of\ SFDataPts\r\n
+comment7.params=dataSet
+comment7.target=int\ getMaxYCoord(SFDataPt[])
+comment7.text=\r\n\ Returns\ the\ maximum\ y-coordinate\ contained\ in\ the\ dataSet.\r\n\ \r\n\ @param\ dataSet\ An\ array\ of\ SFDataPts\r\n
+numComments=8
